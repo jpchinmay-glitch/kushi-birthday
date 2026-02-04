@@ -76,46 +76,54 @@ p { font-size:1.4em; color:#fff; max-width:650px; text-align:center; margin-bott
 </audio>
 
 <script>
-const btn = document.getElementById("startBtn");
-const music = document.getElementById("bg-music");
-const images = document.querySelectorAll(".images img");
-const container = document.getElementById("imageContainer");
-const finalMessage = document.getElementById("finalMessage");
+const btn=document.getElementById("startBtn");
+const music=document.getElementById("bg-music");
+const images=document.querySelectorAll(".images img");
+const container=document.getElementById("imageContainer");
+const finalMessage=document.getElementById("finalMessage");
 
-btn.addEventListener("click", () => {
-    music.volume = 0.6;
-    music.play().catch(err => {
-        console.log("Playback blocked:", err);
+btn.addEventListener("click",()=>{
+    music.volume=0.6;
+    music.play().catch(err=>{
+        console.log("Playback blocked:",err);
         alert("Tap anywhere to start the music!");
     });
+    btn.style.display="none";
+    container.style.opacity=1;
 
-    btn.style.display = "none";
-    container.style.opacity = 1;
-
-    let index = 0;
-
-    function showNextImage() {
-        if (index >= images.length) {
-            setTimeout(() => finalMessage.classList.add("show"), 3000);
+    let index=0;
+    function showNextImage(){
+        if(index>=images.length){
+            setTimeout(()=>finalMessage.classList.add("show"),3000);
             return;
         }
-
-        const img = images[index];
+        const img=images[index];
         img.classList.add("zoom");
-
-        setTimeout(() => {
-            img.classList.add("settle");
-            index++;
-            showNextImage();
-        }, 1500);
+        setTimeout(()=>img.classList.add("settle"),1400);
+        index++;
+        setTimeout(showNextImage,3000);
     }
-
     showNextImage();
+    setInterval(launchFireworks,900);
 });
+
+function launchFireworks(){
+    for(let i=0;i<25;i++){
+        const spark=document.createElement("div");
+        spark.style.position="absolute";
+        spark.style.width=spark.style.height="6px";
+        spark.style.backgroundColor=`hsl(${Math.random()*360},100%,60%)`;
+        spark.style.borderRadius="50%";
+        spark.style.left=Math.random()*window.innerWidth+"px";
+        spark.style.top=Math.random()*window.innerHeight+"px";
+        spark.style.pointerEvents="none";
+        spark.style.zIndex="1";
+        document.body.appendChild(spark);
+        spark.animate([{transform:"scale(1)",opacity:1},{transform:"scale(0)",opacity:0}],{duration:1500,easing:"ease-out"});
+        setTimeout(()=>spark.remove(),1500);
+    }
+}
 </script>
+
 </body>
 </html>
-
-
-    
-
