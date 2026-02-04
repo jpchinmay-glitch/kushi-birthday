@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Kushi!</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            color: #fff;
+            text-shadow: 2px 2px 10px #ff69b4;
+            animation: bounce 1s infinite alternate;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5em;
+            color: #fff;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 5px #ff69b4;
+        }
+
+        .images {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .images img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .images img:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            top: 0;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Happy Birthday, Kushi! 🎉</h1>
+
+    <p>Wishing you a day filled with love, laughter, and all the happiness in the world. Enjoy your special day! ❤️</p>
+
+    <div class="images">
+        <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?fit=crop&w=200&h=200" alt="Birthday Pic">
+    </div>
+
+    <audio id="birthdaySong" autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Play audio automatically on page load
+        window.onload = function() {
+            const song = document.getElementById('birthdaySong');
+            song.play().catch(() => {
+                // If autoplay is blocked, show a message or ignore
+                console.log("Autoplay blocked, click to play the song.");
+            });
+        };
+
+        const colors = ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1b1'];
+        for(let i=0; i<100; i++){
+            let confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.width = confetti.style.height = Math.random() * 10 + 5 + 'px';
+            confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+            document.body.appendChild(confetti);
+        }
+    </script>
+
+</body>
+</html>
